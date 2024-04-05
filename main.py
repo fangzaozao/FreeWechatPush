@@ -8,12 +8,12 @@ from bs4 import BeautifulSoup
 
 
 # 从测试号信息获取
-appID = ""
-appSecret = ""
+appID = "wxe30efd7769ecc6d3"
+appSecret = "c899dee4166e4e54afa1b86a34d5cd58"
 #收信人ID即 用户列表中的微信号，见上文
-openId = ""
+openId = "oMrJY6luCN1w-HREheP3nPnk9t-4"
 # 天气预报模板ID
-weather_template_id = ""
+weather_template_id = "ctfsgTi9DDbEfVbJmPMUnr7IquUfy3d10vNwqmyjrm0"
 # 时间表模板ID
 timetable_template_id = ""
 
@@ -74,14 +74,12 @@ def get_access_token():
     return access_token
 
 
-def get_daily_love():
-    # 每日一句情话
-    url = "https://api.lovelive.tools/api/SweetNothings/Serialization/Json"
-    r = requests.get(url)
-    all_dict = json.loads(r.text)
-    sentence = all_dict['returnObj'][0]
-    daily_love = sentence
-    return daily_love
+def love_day():
+    import datetime
+    today = datetime.date.today()
+    delta = today - datetime(2023,03,03)
+    days = delta.days
+    return love_day
 
 
 def send_weather(access_token, weather):
@@ -115,7 +113,7 @@ def send_weather(access_token, weather):
                 "value": weather[3]
             },
             "today_note": {
-                "value": get_daily_love()
+                "value": love_day()
             }
         }
     }
